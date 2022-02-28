@@ -1,0 +1,17 @@
+{
+	"scripts": {
+		"dev": "nodemon --exec babel-node src/app.js",
+		"start": "node --exec babel-node src/app.js"
+	},
+	"dependencies": {
+		"express": "^4.17.3"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.17.6",
+		"@babel/core": "^7.17.5",
+		"@babel/node": "^7.16.8",
+		"@babel/preset-env": "^7.16.11",
+		"dotenv": "^16.0.0",
+		"nodemon": "^2.0.15"
+	}
+}

@@ -4,7 +4,8 @@
 		"start": "node --exec babel-node src/app.js"
 	},
 	"dependencies": {
-		"express": "^4.17.3"
+		"express": "^4.17.3",
+		"mongoose": "^6.2.3"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.17.6",

@@ -2,6 +2,7 @@ import "dotenv/config";
 
 export default {
 	PORT: process.env['PORT'],
+	SECRET: process.env["SECRET"]
 }
 
 export const database = {

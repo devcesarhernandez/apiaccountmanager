@@ -1,6 +1,6 @@
 import Category from "../Schemas/categorySchema"
 
-export const getById = ( id ) => {
+export const getById = async ( id ) => {
 	if ( !id ) return false
 	const category = await Category.findById(id).exec()
 	return category
@@ -26,8 +26,14 @@ export const getOneCategoryByParam = async ( param ) => {
 	return await Category.findOne(param).exec()
 }
 
-export const searchByParams = async ( params ) => {
+export const getAllCategories = async () => {
+	return await Category.find({}).exec()
+}
+
+export const searchByParams = async ( params, exact ) => {
 	if ( typeof params != "object" ) return false
-	const filter = Object.keys(params).map( key => ({[key]: new RegExp( params[key], "i" ) }))
+	const filter = Object.keys(params).map( key => ({
+		[key]: exact ? params[key] : new RegExp( params[key], "i" )
+	}))
 	return await Category.find({$or: filter}).exec()
 }

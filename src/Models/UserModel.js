@@ -1,6 +1,6 @@
 import User from "../Schemas/userSchema"
 
-export const getById = ( id ) => {
+export const getById = async ( id ) => {
 	if ( !id ) return false
 	const user = await User.findById(id).exec()
 	return user
@@ -26,8 +26,10 @@ export const getOneUserByParam = async ( param ) => {
 	return await User.findOne(param).exec()
 }
 
-export const searchByParams = async ( params ) => {
+export const searchByParams = async ( params, exact ) => {
 	if ( typeof params != "object" ) return false
-	const filter = Object.keys(params).map( key => ({[key]: new RegExp( params[key], "i" ) }))
+	const filter = Object.keys(params).map( key => ({
+		[key]: exact ? params[key] : new RegExp( params[key], "i" )
+	}))
 	return await User.find({$or: filter}).exec()
 }

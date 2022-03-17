@@ -8,14 +8,14 @@ const platformSchema = new Schema({
 		trim: true,
 		maxLength: 50
 	},
-	utl: {
+	url: {
 		type: String,
 		required: true,
 		maxLength: 60
 	},
 	icon: {
-		type: Buffer,
-		required: true
+		data: Buffer,
+		contentType: String,
 	},
 	category: {
 		type: ObjectId,
@@ -23,4 +23,4 @@ const platformSchema = new Schema({
 	}
 })
 
-export default model(platformSchema)
+export default model("Platform", platformSchema)

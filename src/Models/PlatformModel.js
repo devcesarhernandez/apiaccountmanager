@@ -1,6 +1,6 @@
 import Platform from "../Schemas/platformSchema"
 
-export const getById = ( id ) => {
+export const getById = async ( id ) => {
 	if ( !id ) return false
 	const platform = await Platform.findById(id).exec()
 	return platform
@@ -26,8 +26,14 @@ export const getOnePlatformByParam = async ( param ) => {
 	return await Platform.findOne(param).exec()
 }
 
-export const searchByParams = async ( params ) => {
+export const getAllPlatforms = async () => {
+	return await Platform.find({}).exec()
+}
+
+export const searchByParams = async ( params, exact ) => {
 	if ( typeof params != "object" ) return false
-	const filter = Object.keys(params).map( key => ({[key]: new RegExp( params[key], "i" ) }))
+	const filter = Object.keys(params).map( key => ({
+		[key]: exact ? params[key] : new RegExp( params[key], "i" )
+	}))
 	return await Platform.find({$or: filter}).exec()
 }

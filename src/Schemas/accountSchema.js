@@ -34,4 +34,4 @@ const accountSchema = new Schema({
 	}
 })
 
-export default model(accountSchema)
+export default model("Account", accountSchema)

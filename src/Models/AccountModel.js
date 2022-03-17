@@ -26,8 +26,10 @@ export const getOneUserByParam = async ( param ) => {
 	return await User.findOne(param).exec()
 }
 
-export const searchByParams = async ( params ) => {
+export const searchByParams = async ( params, exact ) => {
 	if ( typeof params != "object" ) return false
-	const filter = Object.keys(params).map( key => ({[key]: new RegExp( params[key], "i" ) }))
+	const filter = Object.keys(params).map( key => ({
+		[key]: exact ? params[key] : new RegExp( params[key], "i" )
+	}))
 	return await User.find({$or: filter}).exec()
 }

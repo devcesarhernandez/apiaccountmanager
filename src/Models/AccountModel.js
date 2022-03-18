@@ -27,6 +27,11 @@ export const deleteById = async ( id ) => {
 	return await Account.findByIdAndDelete(id).exec()
 }
 
+export const deleteAllAccountsByUserId = async ( userId ) => {
+	if ( !userId ) return false
+	return await Account.deleteMany( { userId } ).exec()
+}
+
 export const getOneAccountByParam = async ( param ) => {
 	if ( typeof param != "object" ) return false
 	return await Account.findOne(param).exec()

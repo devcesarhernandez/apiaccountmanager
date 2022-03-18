@@ -1,29 +1,35 @@
-import User from "../Schemas/userSchema"
+import Account from "../Schemas/accountSchema"
 
 export const getById = async (id) => {
 	if ( !id ) return false
-	const user = await User.findById(id).exec()
-	return user
+	const account = await Account.findById(id).exec()
+	return account
 }
 
-export const saveUser = async ( data ) => {
-	const user = new User(data)
-	return await user.save()
+export const getAllAccountsByUserId = async ( userId ) => {
+	if ( !userId ) return false
+	const accounts = await Account.find({userId}).exec()
+	return accounts
+}
+
+export const saveAccount = async ( data ) => {
+	const account = new Account(data)
+	return await account.save()
 }
 
 export const update = async ( id, data ) => {
 	if ( !id || !data ) return false
-	return await User.findByIdAndUpdate(id, data).exec()
+	return await Account.findByIdAndUpdate(id, data, { new: true }).exec()
 }
 
 export const deleteById = async ( id ) => {
 	if ( !id ) return false
-	return await User.findByIdAndDelete(id).exec()
+	return await Account.findByIdAndDelete(id).exec()
 }
 
-export const getOneUserByParam = async ( param ) => {
+export const getOneAccountByParam = async ( param ) => {
 	if ( typeof param != "object" ) return false
-	return await User.findOne(param).exec()
+	return await Account.findOne(param).exec()
 }
 
 export const searchByParams = async ( params, exact ) => {
@@ -31,5 +37,5 @@ export const searchByParams = async ( params, exact ) => {
 	const filter = Object.keys(params).map( key => ({
 		[key]: exact ? params[key] : new RegExp( params[key], "i" )
 	}))
-	return await User.find({$or: filter}).exec()
+	return await Account.find({$or: filter}).exec()
 }

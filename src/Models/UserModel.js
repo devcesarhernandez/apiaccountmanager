@@ -13,7 +13,7 @@ export const saveUser = async ( data ) => {
 
 export const update = async ( id, data ) => {
 	if ( !id || !data ) return false
-	return await User.findByIdAndUpdate(id, data).exec()
+	return await User.findByIdAndUpdate(id, data, {new: true}).exec()
 }
 
 export const deleteById = async ( id ) => {

@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import env from "./Config/env"
 import Routes from "./Routes"
 import userID from "./Middlewares/sessionHandle"
@@ -6,6 +7,7 @@ import userID from "./Middlewares/sessionHandle"
 const app = express()
 
 // Middlewares
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(userID)

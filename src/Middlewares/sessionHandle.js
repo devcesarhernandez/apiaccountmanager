@@ -5,9 +5,9 @@ export default async (req, res, next) => {
 		const token = req.headers?.token
 		if ( token ) {
 			const info = await jwt.verify( token )
-			req.body.idUserSession = info.sub
+			req.body.userId = info.id
 		} else {
-			req.body.idUserSession = -1
+			req.body.userId = -1
 		}
 		next();
 	} catch ( err ) {
